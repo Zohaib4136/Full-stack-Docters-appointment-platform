@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+.gradient {
+  @apply bg-gradient-to-b from-emerald-500 to-teal-400;
+}
+
+.gradient-title {
+  @apply bg-gradient-to-b from-emerald-500 to-teal-400 text-transparent bg-clip-text pb-1 pr-2;
+}
