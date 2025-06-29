@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { CardHeader } from "@/components/ui/card";
 import { CardTitle } from "@/components/ui/card";
 import { CardContent } from "@/components/ui/card";
+import Pricing from "@/components/ui/pricing";
 
 export default function Home() {
   return (
@@ -121,6 +122,7 @@ export default function Home() {
             </p>
           </div>
           <div>
+            <Pricing />
             <Card className="mt-12 bg-muted/30 border-emerald-900/20 hover:border-emerald-700 transition-all duration-300">
               <CardHeader>
                 <CardTitle className="text-xl font-semibold text-white flex items-center">
