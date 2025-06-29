@@ -110,7 +110,8 @@ model CreditTransaction {
 enum TransactionType {
   CREDIT_PURCHASE     // Credits purchased through Clerk Billing
   APPOINTMENT_DEDUCTION // Credit used for appointment
-  ADMIN_ADJUSTMENT      // Manual adjustment by admin
+  ADMIN_ADJUSTMENT  
+  CREDIT_ALLOCATION    // Manual adjustment by admin
 }
 
 model Payout {

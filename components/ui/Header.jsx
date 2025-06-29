@@ -11,10 +11,21 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { checkUser } from "@/lib/checkUser";
-import { User, CalendarCheck, Stethoscope, ShieldCheck } from "lucide-react";
+import {
+  User,
+  CalendarCheck,
+  Stethoscope,
+  ShieldCheck,
+  CreditCard,
+} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { checkAndAllocateCredits } from "@/actions/credits";
 
 const Header = async () => {
   const user = await checkUser();
+  if (user?.role === "PATIENT") {
+    await checkAndAllocateCredits(user);
+  }
 
   return (
     <header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-10 supports-[backdrop-filter]:bg-background/60">
@@ -90,6 +101,28 @@ const Header = async () => {
               </Link>
             )}
           </SignedIn>
+
+          {(!user || user?.role === "PATIENT") && (
+            <Link href="/pricing">
+              <Badge
+                variant="outline"
+                className="h-9 bg-emerald-900/20 border border-emerald-700 px-3 py-1 flex items-center gap-2"
+              >
+                <CreditCard className="h-4 w-4 text-emerald-400" />
+                <span className="text-emerald-400 flex items-center gap-1">
+                  {user && user?.role === "PATIENT" ? (
+                    <>
+                      {user.credits}
+                      <span className="hidden md:inline">Credits</span>
+                    </>
+                  ) : (
+                    "Pricing"
+                  )}
+                </span>
+              </Badge>
+            </Link>
+          )}
+
           <SignedOut>
             <SignInButton>
               <Button variant="primary">Sign In</Button>
