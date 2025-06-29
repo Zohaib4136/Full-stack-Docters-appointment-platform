@@ -11,6 +11,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { checkUser } from "@/lib/checkUser";
+import { User, CalendarCheck, Stethoscope, ShieldCheck } from "lucide-react";
 
 const Header = async () => {
   const user = await checkUser();
@@ -29,18 +30,62 @@ const Header = async () => {
         </Link>
         <div className="flex items-center space-x-2">
           <SignedIn>
+            {user?.role === "ADMIN" && (
+              <Link href="/admin">
+                <Button
+                  variant="outline"
+                  className="hidden md:inline-flex items-center gap-2"
+                >
+                  <ShieldCheck className="h-4 w-4" />
+                  Admin Dashboard
+                </Button>
+                <Button variant="ghost" className="md:hidden w-10 h-10 p-0">
+                  <ShieldCheck className="h-4 w-4" />
+                </Button>
+              </Link>
+            )}
+
+            {user?.role === "DOCTOR" && (
+              <Link href="/doctor">
+                <Button
+                  variant="outline"
+                  className="hidden md:inline-flex items-center gap-2"
+                >
+                  <Stethoscope className="h-4 w-4" />
+                  Doctor Dashboard
+                </Button>
+                <Button variant="ghost" className="md:hidden w-10 h-10 p-0">
+                  <Stethoscope className="h-4 w-4" />
+                </Button>
+              </Link>
+            )}
+
+            {user?.role === "PATIENT" && (
+              <Link href="/appointments">
+                <Button
+                  variant="outline"
+                  className="hidden md:inline-flex items-center gap-2"
+                >
+                  <CalendarCheck className="h-4 w-4" />
+                  My Appointments
+                </Button>
+                <Button variant="ghost" className="md:hidden w-10 h-10 p-0">
+                  <CalendarCheck className="h-4 w-4" />
+                </Button>
+              </Link>
+            )}
+
             {user?.role === "UNASSIGNED" && (
               <Link href="/onboarding">
                 <Button
                   variant="outline"
-                  className="hidder md:inline-flex items-center gap-2"
+                  className="hidden md:inline-flex items-center gap-2"
                 >
-                  <user className="h-4 w-4" />
-                  Profile
-                </Button>
-                <Button variant={"ghost"} className="md:hidden w-10 h-10 p-0">
                   <User className="h-4 w-4" />
-                  {console.log("User:", user)}
+                  Complete Profile
+                </Button>
+                <Button variant="ghost" className="md:hidden w-10 h-10 p-0">
+                  <User className="h-4 w-4" />
                 </Button>
               </Link>
             )}
